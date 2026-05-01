@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Con Aroma y Sabor Asiático</title>
+    
+    <!-- FAVICON (Logo en la pestaña) -->
+    <link rel="icon" href="Imagen1.png" type="image/png">
+
+    <!-- FUENTE ESTILO ORIENTAL -->
+    <link href="https://fonts.googleapis.com/css2?family=Shojumaru&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rojo-imperial: #C41E3A;
+            --dorado-calidez: #D4AF37;
+            --negro-carbon: #1A1A1A;
+            --blanco-hueso: #F5F5F2;
+            --gris-oscuro: #2C2C2C;
+            --nav-bg: rgba(26, 26, 26, 0.98);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+
+        body { background-color: var(--negro-carbon); color: var(--blanco-hueso); }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        nav {
+            background: var(--nav-bg);
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--dorado-calidez);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-top {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-logo { 
+            font-family: 'Shojumaru', cursive; 
+            color: var(--rojo-imperial); 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { text-decoration: none; color: var(--blanco-hueso); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--dorado-calidez); }
+
+        /* --- SECCIÓN HERO --- */
+        
+        #inicio {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+        .video-bg iframe { width: 100vw; height: 100%; min-height: 100vh; min-width: 100%; position: absolute; top: 100%; left: 100%; transform: translate(100%, 100%); }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: -1; }
+
+        /* AJUSTE: LOGO MÁS GRANDE */
+        .hero-content img { 
+            max-width: 380px; /* Aumentado para que resalte más */
+            height: auto;
+            margin-bottom: 10px; 
+        }
+        
+        .hero-content h1 { 
+            font-family: 'Shojumaru', cursive !important;
+            color: var(--rojo-imperial);
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            font-family: 'Shojumaru', cursive !important;
+            display: block;
+        }
+
+        .hero-content h1 span.grande {
+            font-size: 3.5rem;
+        }
+
+        .hero-content h1 span.pequeno {
+            font-size: 2.2rem;
+        }
+        
+        .hero-content p { font-size: 1.5rem; color: var(--dorado-calidez); font-style: italic; margin-top: 15px; margin-bottom: 30px; }
+
+        /* --- INFO LOGÍSTICA --- */
+        .logistica-bar { background: var(--rojo-imperial); padding: 20px; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; }
+        .logistica-item h4 { color: var(--dorado-calidez); text-transform: uppercase; font-size: 0.8rem; }
+
+        /* --- MENÚ ESTILO TARJETAS --- */
+        .seccion-contenedor { padding: 80px 10%; }
+        .titulo-seccion { text-align: center; font-size: 2.5rem; color: var(--dorado-calidez); margin-bottom: 50px; text-transform: uppercase; }
+
+        .categoria-label { font-size: 1.8rem; color: var(--rojo-imperial); margin: 40px 0 20px; border-left: 5px solid var(--dorado-calidez); padding-left: 15px; }
+
+        .grid-menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+
+        .card-platillo {
+            background: var(--gris-oscuro);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-platillo:hover { border-color: var(--dorado-calidez); transform: translateY(-5px); }
+
+        .platillo-img-container {
+            width: 100%;
+            height: 180px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 2px solid var(--dorado-calidez);
+        }
+        .platillo-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .platillo-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .platillo-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .platillo-nombre { font-weight: bold; color: var(--dorado-calidez); font-size: 1.1rem; flex: 1; text-transform: uppercase; }
+        .platillo-precio { font-weight: bold; color: var(--rojo-imperial); margin-left: 10px; font-size: 1.1rem; }
+        .platillo-desc { font-size: 0.9rem; color: #ccc; line-height: 1.4; }
+
+        /* --- OTRAS SECCIONES --- */
+        .historia-content { text-align: center; max-width: 900px; margin: 0 auto; line-height: 1.8; }
+        .cita-historia { font-style: italic; font-size: 1.2rem; color: var(--dorado-calidez); margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .img-restaurante-placeholder { width: 100%; height: 400px; background: #222; border-radius: 10px; margin: 40px 0; display: flex; align-items: center; justify-content: center; color: #555; border: 1px dashed var(--dorado-calidez); }
+        
+        .filosofia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .bloque-filosofia { background: #111; padding: 30px; border-radius: 10px; border-top: 4px solid var(--rojo-imperial); text-align: center; }
+        .bloque-filosofia h3 { color: var(--dorado-calidez); text-transform: uppercase; margin-bottom: 15px; }
+
+        /* --- TESTIMONIOS CON IMAGEN ABAJO --- */
+        .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        
+        .testimonio-card { 
+            background: var(--gris-oscuro); 
+            border-radius: 12px; 
+            border-left: 4px solid var(--dorado-calidez);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+        .testimonio-texto { padding: 25px 25px 10px 25px; flex-grow: 1; }
+        .testimonio-autor { font-weight: bold; color: var(--rojo-imperial); display: block; margin-top: 10px; }
+        
+        .testimonio-img-container {
+            width: 100%;
+            height: 150px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-top: 2px solid var(--dorado-calidez);
+        }
+        .testimonio-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        footer { text-align: center; padding: 50px; background: #000; border-top: 1px solid var(--dorado-calidez); }
+
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .filosofia-grid { grid-template-columns: 1fr; }
+            .hero-content h1 span.grande { font-size: 2.2rem; }
+            .hero-content h1 span.pequeno { font-size: 1.5rem; }
+            .hero-content img { max-width: 250px; }
+        }
+   </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand">
+            <img src="Imagen1.png" alt="Logo" class="logo-top">
+            <div class="nav-logo">Aroma y Sabor</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#menu">Menú</a></li>
+            <li><a href="#historia">Quiénes Somos</a></li>
+            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+        </ul>
+    </nav>
+
+    <header id="inicio">
+        <div class="video-bg">
+            <!-- REEMPLAZO DE IFRAME POR VIDEO LOCAL -->
+            <video autoplay muted loop playsinline id="videoFondo">
+                <source src="istockphoto-2231322311-640_adpp_is.mp4" type="video/mp4">
+                Tu navegador no soporta el formato de video.
+            </video>
+        </div>
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <img src="Imagen2.png" alt="Logo">
+            <h1>
+                <span class="grande">Con Aroma y</span>
+                <span class="pequeno">Sabor Asiático</span>
+            </h1>
+            <p>Tradición oriental con alma chapina</p>
+        </div>
+    </header>
+
+    <div class="logistica-bar" id="contacto">
+        <div class="logistica-item"><h4>Horario</h4><p>Mar - Dom: 12:00 - 21:00</p></div>
+        <div class="logistica-item"><h4>Dirección</h4><p>Ciudad de Guatemala, Centro Histórico</p></div>
+        <div class="logistica-item"><h4>Contacto</h4><p>+502 0000-0000</p></div>
+    </div>
+
+
+    <section class="seccion-contenedor" id="menu">
+        <h2 class="titulo-seccion">Nuestra Carta</h2>
+
+        <h3 class="categoria-label"> Entradas y Sopas</h3>
+        <div class="grid-menu">
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="congee de pollo.png" alt="Congee"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">El Alba de Antigua (Congee)</span><span class="platillo-precio">Q35.00</span></div>
+                    <p class="platillo-desc">Sopa de
+arroz cremosa con jengibre y pollo criollo</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="2. Nidos del Orientecito (Tortilla Japonesa).png" alt="Rollitos"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Nidos del Orientecito</span><span class="platillo-precio">Q30.00</span></div>
+                    <p class="platillo-desc">Rollitos de huevo con vegetales frescos del mercado y soya artesanal.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="3. Panecillos de la Abuela Lee (Bao de Frijol).png" alt="Bao"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Panecillos de la Abuela Lee</span><span class="platillo-precio">Q28.00</span></div>
+                    <p class="platillo-desc">Panes al vapor rellenos de frijol negro volteado y 
+un toque de panela, uniendo la técnica asiática 
+con el dulce chapín.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="claridad.jpeg" alt="Sopa"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Claridad del Chichicastenango</span><span class="platillo-precio">Q32.00</span></div>
+                    <p class="platillo-desc">Caldo ligero con fideos de 
+arroz y legumbres frescas traídas 
+directamente del altiplano. </p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="categoria-label"> Especialidades al Wok</h3>
+        <div class="grid-menu">
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="5. El Consentido de la Cuadra (Chow Mein Chapín Premium).jpeg" alt="Chow Mein"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">El Consentido de la Cuadra</span><span class="platillo-precio">Q48.00</span></div>
+                    <p class="platillo-desc">Fideos de trigo salteados con el sofrito
+tradicional de la madre fundadora y vegetales
+crujientes. .</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="6. Sol de la Costa (Cerdo Agridulce con Piña).jpeg" alt="Cerdo"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Sol de la Costa (Cerdo Agridulce)</span><span class="platillo-precio">Q58.00</span></div>
+                    <p class="platillo-desc">Trozos de cerdo crujiente con piña
+fresca de Escuintla y chile pimiento, en una
+salsa roja vibrante</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="7. Arroz Tesoro de Tikal (Arroz Cantonés Chapín).jpeg" alt="Arroz"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Arroz Tesoro de Tikal</span><span class="platillo-precio">Q55.00</span></div>
+                    <p class="platillo-desc">Combinación de arroz salteado con
+jamón, huevo y el "toque secreto" que sabe a
+hogar.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="8. Pollo de la Montaña (Teriyaki con Miel).jpeg" alt="Pollo"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Pollo de la Montaña (Teriyaki)</span><span class="platillo-precio">Q52.00</span></div>
+                    <p class="platillo-desc">Pechuga de pollo glaseada con soya y miel
+pura de abejas local, servida con arroz
+blanco. </p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="ramen.jpeg" alt="Ramen"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Ramen de la Meseta</span><span class="platillo-precio">Q65.00</span></div>
+                    <p class="platillo-desc">Receta robusta de fideos en caldo de larga
+cocción con huevo duro y ajo dorado, ideal para
+el clima frío. </p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="mar.jpeg" alt="Camaron"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Mar del Pacífico al Wok</span><span class="platillo-precio">Q75.00</span></div>
+                    <p class="platillo-desc">Camarones grandes del
+puerto salteados con fideos, jengibre y
+cebollín fresco.
+</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="categoria-label"> Bebidas</h3>
+        <div class="grid-menu">
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="11. Rocío del Altiplano (Té de Jazmín con Cardamomo).jpeg" alt="Té"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Rocío del Altiplano</span><span class="platillo-precio">Q22.00</span></div>
+                    <p class="platillo-desc">nfusión fría de té verde
+jazmín aromatizada con semillas de
+cardamomo cobanero y un toque de miel.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="12. Perlas del Pacífico (Bubble Tea de Horchata).jpeg" alt="Bubble Tea"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Perlas del Pacífico (Bubble Tea)</span><span class="platillo-precio">Q28.00</span></div>
+                    <p class="platillo-desc"> Nuestra famosa horchata de
+arroz con canela, servida con perlas de
+tapioca negra, uniendo lo mejor de dos
+mundos en un vaso. </p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="13. Fuego de los Cuchumatanes (Té de Jengibre y Panela).jpeg" alt="Infusión"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Fuego de los Cuchumatanes</span><span class="platillo-precio">Q18.00</span></div>
+                    <p class="platillo-desc">Infusión caliente de jengibre fresco
+picante, endulzada con panela orgánica, ideal
+para la sobremesa.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="14. Granizada Oriental (Matcha con Limonada).jpeg" alt="Matcha"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Granizada Oriental (Matcha)</span><span class="platillo-precio">Q25.00</span></div>
+                    <p class="platillo-desc">Té verde matcha japonés
+batido con limón real y hielo triturado, una
+opción refrescante y energética. </p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="categoria-label"> Repostería</h3>
+        <div class="grid-menu">
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="15. Volcanes de Arroz (Mochi de Relleno de Leche Poleada).jpeg" alt="Mochi"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Volcanes de Arroz (Mochi)</span><span class="platillo-precio">Q20.00</span></div>
+                    <p class="platillo-desc">Pastelitos de arroz pegajoso rellenos de una
+suave crema de leche poleada y canela.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="16. Delicia de la Antigua (Rollitos Dulces de Camote).jpeg" alt="Dulce"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Delicia de la Antigua</span><span class="platillo-precio">Q24.00</span></div>
+                    <p class="platillo-desc">Masa de rollito primavera rellena
+de puré de camote dulce y coco, fritos y
+espolvoreados con azúcar y canela.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="17. Oro de Izabal (Pan de Plátano al Vapor).jpeg" alt="Pan"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Oro de Izabal</span><span class="platillo-precio">Q15.00</span></div>
+                    <p class="platillo-desc">Bizcocho
+suave cocido al vapor con plátano maduro y
+semillas de sésamo negro.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="categoria-label"> Especialidades de la Casa</h3>
+        <div class="grid-menu">
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="18. El Gran Wok del Capitán (Salteado Mar y Tierra).png" alt="Wok"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">El Gran Wok del Capitán</span><span class="platillo-precio">Q85.00</span></div>
+                    <p class="platillo-desc">Combinación de lomo
+de res, pollo y camarones con
+vegetales de temporada, sazonados
+con una reducción de soya y un
+toque de chile pasa.</p>
+                </div>
+            </div>
+            <div class="card-platillo">
+                <div class="platillo-img-container"><img src="19. Fideos del Reencuentro (Udon con Salsa de Maní).png" alt="Udon"></div>
+                <div class="platillo-info">
+                    <div class="platillo-header"><span class="platillo-nombre">Fideos del Reencuentro (Udon)</span><span class="platillo-precio">Q60.00</span></div>
+                    <p class="platillo-desc">Fideos gruesos udon en una salsa
+cremosa de maní tostado y especias, decorado
+con cilantro fresco y cebollín.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="seccion-contenedor" id="historia" style="background: #111;">
+        <h2 class="titulo-seccion">Quiénes Somos</h2>
+        <div class="historia-content">
+            <p class="cita-historia">"La comida asiática es una experiencia inolvidable que no solo satisface tus gustos, sino
+que los convierte en una necesidad. En 'Con Aroma y Sabor Asiático' pasas los mejores
+momentos, pues cada plato combina una armonía de texturas que la convierten en algo
+más que una simple comida: un viaje cultural."
+" <br> <small>— En memoria de María Rosales y José Gonzalez</small></p>
+            <p>La empresa "Con Aroma y Sabor Asiático" fue establecida originalmente como una unidad de 
+negocio familiar, enfocada en traer las técnicas de la cocina oriental y adaptarlas con cuidado al 
+gusto de los guatemaltecos. La visión de los fundadores (padres de la actual dueña) nació de 
+una premisa técnica clara: la Fusión Gastronómica Transcultural. Querían rescatar esos sabores 
+milenarios y mezclarlos con la frescura y los olores de nuestros ingredientes, dándole ese toque 
+chapín que nos identifica. Durante años, desarrollaron la propiedad intelectual de la marca, 
+centrada en la estandarización de procesos de cocción al wok y la creación de salsas base con 
+sello artesanal.
+Tras la pérdida de los fundadores, la titularidad fue asumida por Nahomy González, quien tomo 
+el reto de mantener vivo este legado familiar en un mercado donde la competencia es fuerte. La 
+estrategia para asegurar la continuidad operativa no fue individual puesto que nos unimos como 
+equipo de trabajo, aportando nuevas ideas y modernizando la forma en que funciona el negocio. 
+El objetivo fue claro: evitar que la esencia de la fusión se perdiera. El equipo transformó la estructura original en una empresa de alto rendimiento, optimizando la 
+identidad visual para reflejar esta dualidad cultural y digitalizando los procesos de atención. Lo 
+que se buscaba lograr era un puente gastronómico: que el cliente pudiera experimentar la 
+disciplina de la cocina asiática con la calidez y los ingredientes de su propia tierra. "El éxito actual de la marca no es solo una herencia, sino el resultado de una gestión
+profesional que logró honrar la memoria de los fundadores mediante la innovación técnica
+del presente."
+— Nahomy González, Propietaria y directora ejecutiva</p>
+            <div class="img-restaurante-placeholder"> <source><img src="asia1.jpeg" alt="foto compa" height="400" width="5000"><source><img src="asia2.jpeg" alt="foto compa" height="400" width="5000"></div>
+        </div>
+    </section>
+
+    <section class="seccion-contenedor" id="filosofia">
+        <h2 class="titulo-seccion">Nuestra Filosofía</h2>
+        <div class="filosofia-grid">
+            <div class="bloque-filosofia"><h3>Misión</h3><p>Brindar una experiencia gastronómica auténtica que respete la legalidad de los
+fundadores, mediante la elaboración de platos de fusión asiática-guatemalteca bajo los 
+más estrictos estándares de calidad. Nos comprometemos a evolucionar la tradición a 
+través de una gestión profesional, innovando en nuestros procesos para ofrecer un 
+servicio eficiente que convierta cada visita en un viaje cultural inolvidable.</p></div>
+            <div class="bloque-filosofia"><h3>Visión</h3><p>Consolidar a 'Con Aroma y Sabor Asiático' como el máximo referente de la gastronomía 
+de fusión en la región para el año 2028, siendo reconocidos por la excelencia de nuestra 
+cocina y la calidez de nuestro servicio. Aspiramos a ser un modelo de éxito integral que 
+demuestre cómo una herencia familiar, gestionada con profesionalismo y visión 
+estratégica, puede llegar a ser una empresa referente que motive a otros jóvenes a luchar 
+por sus metas mediante el trabajo en equipo y la mejora continua.</p></div>
+        </div>
+    </section>
+<style>
+:root {
+    --rojo-imperial: #C41E3A;
+    --dorado-calidez: #D4AF37;
+    --negro-carbon: #1A1A1A;
+    --blanco-hueso: #F5F5F2;
+    --gris-oscuro: #2C2C2C;
+    --nav-bg: rgba(26, 26, 26, 0.98);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--negro-carbon);
+    color: var(--blanco-hueso);
+}
+
+/* TESTIMONIOS (CORREGIDO) */
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.testimonio-card { 
+    background: var(--gris-oscuro); 
+    border-radius: 12px; 
+    border-left: 4px solid var(--dorado-calidez);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.testimonio-texto {
+    padding: 25px 25px 10px 25px;
+    flex-grow: 1;
+}
+
+.testimonio-autor {
+    font-weight: bold;
+    color: var(--rojo-imperial);
+    display: block;
+    margin-top: 10px;
+}
+
+/* AQUÍ ESTÁ LA CORRECCIÓN */
+.testimonio-img-container {
+    width: 100%;
+    height: 120px; /* más pequeño */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border-top: 2px solid var(--dorado-calidez);
+    overflow: hidden;
+}
+
+.testimonio-img-container img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* evita que se estire */
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 50px;
+    background: #000;
+    border-top: 1px solid var(--dorado-calidez);
+}
+</style>
+    <section class="seccion-contenedor" id="testimonios" style="background: #111;">
+        <h2 class="titulo-seccion">Voces de nuestra mesa</h2>
+        <div class="testimonios-grid">
+            
+            <div class="testimonio-card">
+                <div class="testimonio-texto">
+                    <p>"Probar los Panecillos de la Abuela Lee fue una sorpresa increíble."</p>
+                    <span class="testimonio-autor">— Gabriel Aragón</span>
+                </div>
+                <div class="testimonio-img-container"><img src="aragon.jpeg" alt="Imagen Gabriel"></div>
+            </div>
+
+            <div class="testimonio-card">
+                <div class="testimonio-texto">
+                    <p>"El Rocío del Altiplano es súper refrescante. Se nota la innovación."</p>
+                    <span class="testimonio-autor">— Majorie Erazo</span>
+                </div>
+                <div class="testimonio-img-container"><img src="mayorie.jpeg" alt="Imagen Majorie"></div>
+            </div>
+
+            <div class="testimonio-card">
+                <div class="testimonio-texto">
+                    <p>"El mejor homenaje a la cocina de barrio con un toque profesional."</p>
+                    <span class="testimonio-autor">— Stephanie Corado</span>
+                </div>
+                <div class="testimonio-img-container"><img src="sphefie.jpeg" alt="Imagen Stephanie"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer><p>&copy; 2026 Con Aroma y Sabor Asiático. Todos los derechos reservados.</p></footer>
+
+</body>
+</html>
